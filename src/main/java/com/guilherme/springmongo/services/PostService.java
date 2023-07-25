@@ -1,5 +1,6 @@
 package com.guilherme.springmongo.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,11 @@ public class PostService {
 	
 	public List<Post> findByTitle(String text) {
 		return repo.findByTitleContaining(text);
+	}
+	
+	public List<Post> fullSearch(String text, Date minDate, Date maxDate) {
+		minDate = new Date(minDate.getTime() - 24*60*60*1000);
+		System.out.println(minDate);
+		return repo.fullSearch(text, minDate, maxDate);
 	}
 }
